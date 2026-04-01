@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="جريدة الرياض - أول جريدة رقمية متكاملة تقدم آخر الأخبار العالمية مع قسم ترفيهي متكامل">
+    <meta name="author" content="شركة لحرش للإعلام">
+    <title>جريدة الرياض | آخر الأخبار العالمية</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Changa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'riyadh-green': '#007a3d',
+                        'riyadh-dark': '#0a2f1f',
+                        'riyadh-gold': '#c9a03d',
+                    },
+                    fontFamily: {
+                        'amiri': ['Amiri', 'serif'],
+                        'changa': ['Changa', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 font-changa">
+
+    <!-- Header -->
+    <header class="bg-white border-b-4 border-riyadh-green shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-center md:text-right mb-3 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold font-amiri text-riyadh-green">
+                        جريدة <span class="text-riyadh-dark">الرياض</span>
+                    </h1>
+                    <p class="text-sm text-gray-500">العدد <span id="issueNumber">--</span> | السنة <span id="yearNumber">--</span></p>
+                </div>
+                <div class="text-center">
+                    <div id="hijriDate" class="text-sm text-gray-600 font-amiri"></div>
+                    <div id="gregorianDate" class="text-xs text-gray-500"></div>
+                    <div id="liveClock" class="text-xl font-bold text-riyadh-green font-mono mt-1"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- News Section -->
+            <div class="lg:col-span-3">
+                <!-- Breaking News -->
+                <div class="bg-riyadh-dark text-white p-3 rounded-lg mb-6 flex items-center gap-3 overflow-hidden">
+                    <span class="bg-red-600 px-3 py-1 rounded text-sm font-bold animate-pulse">عاجل</span>
+                    <div id="breakingNews" class="flex-1 overflow-hidden">
+                        <p class="animate-marquee whitespace-nowrap">جاري تحميل الأخبار...</p>
+                    </div>
+                </div>
+                
+                <!-- News Grid -->
+                <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="col-span-full flex justify-center items-center py-20">
+                        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-riyadh-green"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="lg:col-span-1">
+                <!-- Sudoku -->
+                <div class="bg-white rounded-lg shadow-lg p-4 sticky top-24">
+                    <div class="border-b-2 border-riyadh-green pb-2 mb-4">
+                        <h3 class="text-xl font-bold text-riyadh-dark flex items-center gap-2">
+                            <i class="fas fa-puzzle-piece text-riyadh-green"></i>
+                            سودوكو اليوم
+                        </h3>
+                    </div>
+                    <div id="sudokuContainer" class="flex justify-center">
+                        <canvas id="sudokuCanvas" width="350" height="350" class="w-full max-w-[350px] h-auto"></canvas>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <button id="checkSudoku" class="bg-riyadh-green text-white px-4 py-2 rounded hover:bg-riyadh-dark transition text-sm">
+                            <i class="fas fa-check ml-1"></i> تحقق من الحل
+                        </button>
+                        <button id="resetSudoku" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition text-sm mr-2">
+                            <i class="fas fa-redo ml-1"></i> إعادة تعيين
+                        </button>
+                    </div>
+                    <div id="sudokuMessage" class="mt-3 text-center text-sm font-bold"></div>
+                </div>
+                
+                <!-- Links -->
+                <div class="bg-white rounded-lg shadow-lg p-4 mt-6">
+                    <h3 class="text-lg font-bold text-riyadh-dark border-b-2 border-riyadh-green pb-2 mb-3">
+                        روابط سريعة
+                    </h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-700 hover:text-riyadh-green transition flex items-center gap-2"><i class="fas fa-newspaper"></i> آخر الأخبار</a></li>
+                        <li><a href="#" class="text-gray-700 hover:text-riyadh-green transition flex items-center gap-2"><i class="fas fa-chart-line"></i> الاقتصاد</a></li>
+                        <li><a href="#" class="text-gray-700 hover:text-riyadh-green transition flex items-center gap-2"><i class="fas fa-futbol"></i> الرياضة</a></li>
+                        <li><a href="#" class="text-gray-700 hover:text-riyadh-green transition flex items-center gap-2"><i class="fas fa-microchip"></i> التقنية</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-riyadh-dark text-white mt-12 py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-right">
+                <div>
+                    <h4 class="text-lg font-bold mb-3">شركة لحرش للإعلام</h4>
+                    <p class="text-sm text-gray-300">تقدم محتوى إعلامي موثوق ومتجدد على مدار الساعة</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-3">روابط تنظيمية</h4>
+                    <ul class="space-y-1 text-sm">
+                        <li><a href="#" class="text-gray-300 hover:text-riyadh-gold transition">سياسة الخصوصية</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-riyadh-gold transition">شروط الاستخدام</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-riyadh-gold transition">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-3">تابعونا</h4>
+                    <div class="flex justify-center md:justify-start gap-4">
+                        <a href="#" class="text-gray-300 hover:text-riyadh-gold transition text-xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-riyadh-gold transition text-xl"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-riyadh-gold transition text-xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-riyadh-gold transition text-xl"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-4 text-center text-xs text-gray-400">
+                <p>جميع الحقوق محفوظة © 2026 شركة لحرش للإعلام |   </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
