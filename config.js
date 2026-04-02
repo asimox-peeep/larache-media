@@ -1,7 +1,7 @@
 // إعدادات جريدة الرياض
 const CONFIG = {
     // للحصول على مفتاح API مجاني: https://newsapi.org/register
-    NEWS_API_KEY: '',
+    NEWS_API_KEY: '26ee225e22c94b2ba6894ba247de39a0',
     NEWS_API_URL: 'https://newsapi.org/v2/top-headlines',
     
     COUNTRY: 'sa',
